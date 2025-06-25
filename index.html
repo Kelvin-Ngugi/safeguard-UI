@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SafeGuard Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      background-color: #f5f6fa;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      background-color: #ffffff;
+      border-right: 1px solid #e0e0e0;
+      height: 100vh;
+      position: fixed;
+      padding: 20px 0;
+    }
+
+    .logo {
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      color: #e74c3c;
+      margin-bottom: 30px;
+    }
+
+    .menu {
+      list-style: none;
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 20px;
+      color: #333;
+      text-decoration: none;
+      cursor: pointer;
+      font-size: 15px;
+      transition: background 0.2s;
+    }
+
+    .menu-item i {
+      margin-right: 12px;
+      width: 20px;
+      text-align: center;
+    }
+
+    .menu-item:hover {
+      background-color: #f0f0f0;
+    }
+
+    .menu-item.active {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    .main {
+      margin-left: 250px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    .header {
+      background-color: #ffffff;
+      padding: 15px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e0e0e0;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex: 1;
+    }
+
+    .welcome {
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .search-bar input {
+      padding: 6px 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      min-width: 200px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .header-right select {
+      padding: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .avatar-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .avatar-container img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
+
+    .avatar-container button {
+      background: none;
+      border: none;
+      color: #007bff;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Content Area */
+    .content {
+      padding: 25px;
+      flex: 1;
+    }
+
+    .placeholder {
+      background-color: #f9f9f9;
+      border: 2px dashed #ccc;
+      padding: 40px;
+      text-align: center;
+      font-size: 18px;
+      color: #888;
+    }
+
+    .content img.screenshot {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #ccc;
+      }
+      .main {
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="logo">SafeGuard</div>
+    <ul class="menu">
+      <li class="menu-item" onclick="loadContent(event, 'Dashboard Home', 'screenshots/dashboard.png')"><i class="fas fa-home"></i>Dashboard Home</li>
+      <li class="menu-item" onclick="loadContent(event, 'Keyword Filters', 'screenshots/keywords.png')"><i class="fas fa-filter"></i>Keyword Filters</li>
+      <li class="menu-item" onclick="loadContent(event, 'Post Control Panel', 'screenshots/post-control.png')"><i class="fas fa-edit"></i>Post Control Panel</li>
+      <li class="menu-item" onclick="loadContent(event, 'Feedback Reports', 'screenshots/feedback.png')"><i class="fas fa-comments"></i>Feedback Reports</li>
+      <li class="menu-item" onclick="loadContent(event, 'AI Insights', 'screenshots/ai-insights.png')"><i class="fas fa-brain"></i>AI Insights</li>
+      <li class="menu-item" onclick="loadContent(event, 'User Profiles', 'screenshots/users.png')"><i class="fas fa-user"></i>User Profiles</li>
+      <li class="menu-item" onclick="loadContent(event, 'Settings', 'screenshots/settings.png')"><i class="fas fa-cog"></i>Settings</li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <div class="header">
+      <div class="header-left">
+        <div class="welcome">Welcome back, Bonface</div>
+        <div class="search-bar">
+          <input type="text" placeholder="Search...">
+        </div>
+      </div>
+      <div class="header-right">
+        <span>08:10 PM | 6/19/2025</span>
+        <select>
+          <option value="1m">1m</option>
+          <option value="5m">5m</option>
+          <option value="10m">10m</option>
+        </select>
+        <div class="avatar-container">
+          <img src="images/bonface.jpg" alt="User Avatar">
+          <button onclick="logout()">Logout</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="content" id="main-content">
+      <!-- Content will be dynamically injected -->
+    </div>
+  </div>
+
+  <script>
+    function loadContent(event, sectionName, imagePath) {
+      // Remove 'active' from all menu items
+      document.querySelectorAll('.menu-item').forEach(item => {
+        item.classList.remove('active');
+      });
+
+      // If event triggered by user click
+      if (event) {
+        event.currentTarget.classList.add('active');
+      } else {
+        // Apply active based on stored section name
+        document.querySelectorAll('.menu-item').forEach(item => {
+          if (item.textContent.trim() === sectionName) {
+            item.classList.add('active');
+          }
+        });
+      }
+
+      // Inject content
+      const content = document.getElementById('main-content');
+      if (imagePath) {
+        content.innerHTML = `
+          <h2 style="margin-bottom: 20px;">${sectionName}</h2>
+          <img src="${imagePath}" alt="${sectionName} Screenshot" class="screenshot">
+        `;
+      } else {
+        content.innerHTML = `
+          <div class="placeholder">${sectionName} content goes here. Insert screenshot or HTML.</div>
+        `;
+      }
+
+      // Store selection in localStorage
+      localStorage.setItem('selectedSection', sectionName);
+      localStorage.setItem('selectedImagePath', imagePath);
+    }
+
+    function logout() {
+      alert("Logging out...");
+    }
+
+    // Load last selection on startup
+    document.addEventListener('DOMContentLoaded', function () {
+      const section = localStorage.getItem('selectedSection') || 'Dashboard Home';
+      const image = localStorage.getItem('selectedImagePath') || 'screenshots/dashboard.png';
+      loadContent(null, section, image);
+    });
+  </script>
+</body>
+</html>
